@@ -196,14 +196,14 @@ Introduction summary:
 ## <a name="SS-aims"></a>In.aims: Aims
 
 * see [README.md](README.md)
-* TODO: 
-
-As far as we can tell, these rules lead to code that performs as well or better than older, more conventional techniques; they are meant to follow the zero-overhead principle ("what you don't use, you don't pay for" or "when you use an abstraction mechanism appropriately, you get at least as good performance as if you had handcoded using lower-level language constructs").
-Consider these rules ideals for new code, opportunities to exploit when working on older code, and try to approximate these ideals as closely as feasible.
-Remember:
+* zero-overhead principle
+  * == 
+    * "what you don't use, you don't pay for"
+    * "when you use an abstraction mechanism appropriately, you get at least as good performance as if you had handcoded using lower-level language constructs"
 
 ### <a name="R0"></a>In.0: Don't panic!
 
+* TODO:
 Take the time to understand the implications of a guideline rule on your program.
 
 These guidelines are designed according to the "subset of superset" principle ([Stroustrup05](#Stroustrup05)).
@@ -335,20 +335,21 @@ or a specific rule in a profile ([type.4](#Pro-type-cstylecast), or [bounds.2](#
 
 ## <a name="SS-struct"></a>In.struct: The structure of this document
 
-Each rule (guideline, suggestion) can have several parts:
-
-* The rule itself -- e.g., **no naked `new`**
-* A rule reference number -- e.g., **C.7** (the 7th rule related to classes).
-  Since the major sections are not inherently ordered, we use letters as the first part of a rule reference "number".
-  We leave gaps in the numbering to minimize "disruption" when we add or remove rules.
-* **Reason**s (rationales) -- because programmers find it hard to follow rules they don't understand
-* **Example**s -- because rules are hard to understand in the abstract; can be positive or negative
-* **Alternative**s -- for "don't do this" rules
-* **Exception**s -- we prefer simple general rules. However, many rules apply widely, but not universally, so exceptions must be listed
-* **Enforcement** -- ideas about how the rule might be checked "mechanically"
-* **See also**s -- references to related rules and/or further discussion (in this document or elsewhere)
-* **Note**s (comments) -- something that needs saying that doesn't fit the other classifications
-* **Discussion** -- references to more extensive rationale and/or examples placed outside the main lists of rules
+* parts / EACH rule
+  * rule itself
+    * _Example:_ **no naked `new`**
+  * rule reference number
+    * `letterOfTheSectionNumber`
+      * Reason of the letter: 🧠 major sections are NOT  inherently ordered 🧠
+    * _Example:_ **C.7** (== 7th rule related to classes)
+  * **Reason**s (rationales) -- because programmers find it hard to follow rules they don't understand
+  * **Example**s -- because rules are hard to understand in the abstract; can be positive or negative
+  * **Alternative**s -- for "don't do this" rules
+  * **Exception**s -- we prefer simple general rules. However, many rules apply widely, but not universally, so exceptions must be listed
+  * **Enforcement** -- ideas about how the rule might be checked "mechanically"
+  * **See also**s -- references to related rules and/or further discussion (in this document or elsewhere)
+  * **Note**s (comments) -- something that needs saying that doesn't fit the other classifications
+  * **Discussion** -- references to more extensive rationale and/or examples placed outside the main lists of rules
 
 Some rules are hard to check mechanically, but they all meet the minimal criteria that an expert programmer can spot many violations without too much trouble.
 We hope that "mechanical" tools will improve with time to approximate what such an expert programmer notices.
@@ -407,14 +408,10 @@ Supporting sections:
 * [Glossary](#S-glossary)
 * [To-do: Unclassified proto-rules](#S-unclassified)
 
-These sections are not orthogonal.
-
 Each section (e.g., "P" for "Philosophy") and each subsection (e.g., "C.hier" for "Class Hierarchies (OOP)") have an abbreviation for ease of searching and reference.
 The main section abbreviations are also used in rule numbers (e.g., "C.11" for "Make concrete types regular").
 
 # <a name="S-philosophy"></a>P: Philosophy
-
-The rules in this section are very general.
 
 Philosophy rules summary:
 
@@ -432,39 +429,43 @@ Philosophy rules summary:
 * [P.12: Use supporting tools as appropriate](#Rp-tools)
 * [P.13: Use support libraries as appropriate](#Rp-lib)
 
-Philosophical rules are generally not mechanically checkable.
-However, individual rules reflecting these philosophical themes are.
-Without a philosophical basis, the more concrete/specific/checkable rules lack rationale.
+* Philosophical rules
+  * generally, NOT mechanically checkable
+  * individual rules / reflect these philosophical themes
+    * are checkable
 
-### <a name="Rp-direct"></a>P.1: Express ideas directly in code
+### <a name="Rp-direct"></a>P.1: Express ideas directly | code
 
 ##### Reason
 
-Compilers don't read comments (or design documents) and neither do many programmers (consistently).
-What is expressed in code has defined semantics and can (in principle) be checked by compilers and other tools.
+* Compilers do NOT read
+  * comments
+  * design documents
+* THINGS expressed | code
+  * has defined semantics
+  * -- can be checked by --
+    * compilers
+    * OTHER tools
 
 ##### Example
 
     class Date {
     public:
-        Month month() const;  // do
-        int month();          // don't
+        Month month() const;  // do     -- Explicitly ALL defined --
+        int month();          // don't  -- leaves room for possible uncaught bugs --
         // ...
     };
 
-The first declaration of `month` is explicit about returning a `Month` and about not modifying the state of the `Date` object.
-The second version leaves the reader guessing and opens more possibilities for uncaught bugs.
-
 ##### Example, bad
 
-This loop is a restricted form of `std::find`:
+* loop / restricted form of `std::find`
 
     void f(vector<string>& v)
     {
         string val;
         cin >> val;
         // ...
-        int index = -1;                    // bad, plus should use gsl::index
+        int index = -1;                    // bad, plus should use gsl::index TODO:
         for (int i = 0; i < v.size(); ++i) {
             if (v[i] == val) {
                 index = i;
