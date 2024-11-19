@@ -7,25 +7,17 @@ Editors:
 * [Bjarne Stroustrup](http://www.stroustrup.com)
 * [Herb Sutter](http://herbsutter.com/)
 
-This is a living document under continuous improvement.
-Had it been an open-source (code) project, this would have been release 0.8.
-Copying, use, modification, and creation of derivative works from this project is licensed under an MIT-style license.
-Contributing to this project requires agreeing to a Contributor License. See the accompanying [LICENSE](https://github.com/isocpp/CppCoreGuidelines/blob/master/LICENSE) file for details.
-We make this project available to "friendly users" to use, copy, modify, and derive from, hoping for constructive input.
-
-Comments and suggestions for improvements are most welcome.
-We plan to modify and extend this document as our understanding improves and the language and the set of available libraries improve.
-When commenting, please note [the introduction](#S-introduction) that outlines our aims and general approach.
-The list of contributors is [here](#SS-ack).
-
-Problems:
-
-* The sets of rules have not been completely checked for completeness, consistency, or enforceability.
-* Triple question marks (???) mark known missing information
-* Update reference sections; many pre-C++11 sources are too old.
-* For a more-or-less up-to-date to-do list see: [To-do: Unclassified proto-rules](#S-unclassified)
-
-You can [read an explanation of the scope and structure of this Guide](#S-abstract) or just jump straight in:
+* living document23
+* Problems
+  * sets of rules have NOT been completely checked for
+    * completeness,
+    * consistency, or
+    * enforceability
+  * ??? 
+    * == MISSING information
+  * Update reference sections /pre-C++11
+  * list more-or-less | up-to-date | to-do
+    * see [To-do: Unclassified proto-rules](#S-unclassified)
 
 * [In: Introduction](#S-introduction)
 * [P: Philosophy](#S-philosophy)
@@ -60,7 +52,7 @@ Supporting sections:
 * [Glossary](#S-glossary)
 * [To-do: Unclassified proto-rules](#S-unclassified)
 
-You can sample rules for specific language features:
+rules / SPECIFIC language features
 
 * assignment:
 [regular types](#Rc-regular) --
@@ -184,47 +176,9 @@ You can look at design concepts used to express the rules:
 
 # <a name="S-abstract"></a>Abstract
 
-This document is a set of guidelines for using C++ well.
-The aim of this document is to help people to use modern C++ effectively.
-By "modern C++" we mean effective use of the ISO C++ standard (currently C++20, but almost all of our recommendations also apply to C++17, C++14 and C++11).
-In other words, what would you like your code to look like in 5 years' time, given that you can start now? In 10 years' time?
-
-The guidelines are focused on relatively high-level issues, such as interfaces, resource management, memory management, and concurrency.
-Such rules affect application architecture and library design.
-Following the rules will lead to code that is statically type safe, has no resource leaks, and catches many more programming logic errors than is common in code today.
-And it will run fast -- you can afford to do things right.
-
-We are less concerned with low-level issues, such as naming conventions and indentation style.
-However, no topic that can help a programmer is out of bounds.
-
-Our initial set of rules emphasizes safety (of various forms) and simplicity.
-They might very well be too strict.
-We expect to have to introduce more exceptions to better accommodate real-world needs.
-We also need more rules.
-
-You will find some of the rules contrary to your expectations or even contrary to your experience.
-If we haven't suggested you change your coding style in any way, we have failed!
-Please try to verify or disprove rules!
-In particular, we'd really like to have some of our rules backed up with measurements or better examples.
-
-You will find some of the rules obvious or even trivial.
-Please remember that one purpose of a guideline is to help someone who is less experienced or coming from a different background or language to get up to speed.
-
-Many of the rules are designed to be supported by an analysis tool.
-Violations of rules will be flagged with references (or links) to the relevant rule.
-We do not expect you to memorize all the rules before trying to write code.
-One way of thinking about these guidelines is as a specification for tools that happens to be readable by humans.
-
-The rules are meant for gradual introduction into a code base.
-We plan to build tools for that and hope others will too.
-
-Comments and suggestions for improvements are most welcome.
-We plan to modify and extend this document as our understanding improves and the language and the set of available libraries improve.
+* see [README](README.md)
 
 # <a name="S-introduction"></a>In: Introduction
-
-This is a set of core guidelines for modern C++ (currently C++20 and C++17) taking likely future enhancements and ISO Technical Specifications (TSs) into account.
-The aim is to help C++ programmers to write simpler, more efficient, more maintainable code.
 
 Introduction summary:
 
@@ -237,13 +191,13 @@ Introduction summary:
 
 ## <a name="SS-readers"></a>In.target: Target readership
 
-All C++ programmers. This includes [programmers who might consider C](#S-cpl).
+* ALL C++ programmers / includes [C programmers](#S-cpl)
 
 ## <a name="SS-aims"></a>In.aims: Aims
 
-The purpose of this document is to help developers to adopt modern C++ (currently C++20 and C++17) and to achieve a more uniform style across code bases.
+* see [README.md](README.md)
+* TODO: 
 
-We do not suffer the delusion that every one of these rules can be effectively applied to every code base. Upgrading old systems is hard. However, we do believe that a program that uses a rule is less error-prone and more maintainable than one that does not. Often, rules also lead to faster/easier initial development.
 As far as we can tell, these rules lead to code that performs as well or better than older, more conventional techniques; they are meant to follow the zero-overhead principle ("what you don't use, you don't pay for" or "when you use an abstraction mechanism appropriately, you get at least as good performance as if you had handcoded using lower-level language constructs").
 Consider these rules ideals for new code, opportunities to exploit when working on older code, and try to approximate these ideals as closely as feasible.
 Remember:
@@ -19111,9 +19065,9 @@ Not feasible.
 
 # <a name="S-cpl"></a>CPL: C-style programming
 
-C and C++ are closely related languages.
-They both originate in "Classic C" from 1978 and have evolved in ISO committees since then.
-Many attempts have been made to keep them compatible, but neither is a subset of the other.
+* C -- closely related -- C++
+  * Reason: 🧠 BOTH originate -- from -- "Classic C" (1978) / have evolved in ISO committees 🧠
+  * BUT != one == subset of the other
 
 C rule summary:
 
