@@ -1,14 +1,12 @@
-
 # Using the Guidelines Support Library (GSL): A Tutorial and FAQ
-
-by Herb Sutter
 
 updated 2018-01-08
 
+* _Example of an implementation:_ [GSL: Guidelines Support Library](https://github.com/Microsoft/GSL)
 
 ## Overview: "Is this document a tutorial or a FAQ?"
 
-It aims to be both:
+* TODO: It aims to be both:
 
 - a tutorial you can read in order, following a similar style as the introduction of [K&R](https://en.wikipedia.org/wiki/The_C_Programming_Language) by building up examples of increasing complexity; and
 

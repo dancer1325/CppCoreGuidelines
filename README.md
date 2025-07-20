@@ -32,7 +32,4 @@
       * kept simple (MOSTLY in ASCII)
       * allow automatic post-processing (_Example:_ language translation & reformatting) 🧠
 
-## Notes
-
-* [Guidelines Support Library](docs/gsl-intro.md)
-  * _Example of an implementation:_ [GSL: Guidelines Support Library](https://github.com/Microsoft/GSL)
+* [doc](docs/index.md)
