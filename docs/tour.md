@@ -59,3 +59,9 @@ https://isocpp.org/tour
 [amazon link](https://www.amazon.es/Programming-Principles-Practice-Using-C/dp/0138308683/)
 
 * TODO:
+
+
+# The Design and Evolution of C++
+[amazon link](https://www.amazon.com/Design-Evolution-C-Bjarne-Stroustrup/dp/0201543303)
+
+* TODO: 

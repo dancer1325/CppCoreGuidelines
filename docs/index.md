@@ -8,6 +8,14 @@
     * TODO:
   * From another language
     * TODO:
+    * [Learning if you ALREADY know C](wiki.faq.c.md)
+    * TODO:
   * TODO:
+* [Standardization](https://isocpp.org/std)
+  * [The StandardZ](std.the-standard.md)
+  * TODO:
+* [About](about.md)
 * [Guidelines Support Library](gsl-intro.md)
-* 
+* [Bjarne Stroustrup's website](stroustrup.com.index.md)
+  * TODO:
+  * [compilers](stroustrup.com.compilers.md)
