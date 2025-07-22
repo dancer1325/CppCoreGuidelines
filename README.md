@@ -21,15 +21,5 @@
     * if you want to upgrade old systems -> it's hard
 
 * [C++ Core Guidelines](CppCoreGuidelines.md)
-  * collaborative C++ guidelines language  
-    * AFTER many person-years of
-      * discussion
-      * design 
-  * hosted | [here](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
-    * periodically updated -- with -- this repo's master branch
-  * use [GH-flavored MarkDown](https://github.github.com/gfm/)
-    * Reasons: 🧠
-      * kept simple (MOSTLY in ASCII)
-      * allow automatic post-processing (_Example:_ language translation & reformatting) 🧠
 
 * [doc](docs/index.md)

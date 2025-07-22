@@ -1,110 +1,74 @@
-# <a name="main"></a>C++ Core Guidelines
+# C++ Core Guidelines
 
-Oct 3, 2024
-
-Editors:
+* collaborative C++ guidelines language
+  * AFTER many person-years of
+    * discussion
+    * design
+  * goal
+    * C++'
+      * core
+      * use cases
+* hosted | [here](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+  * periodically updated -- with -- this repo's master branch
+* use [GH-flavored MarkDown](https://github.github.com/gfm/)
+  * Reasons: 🧠
+    * kept simple (MOSTLY in ASCII)
+    * allow automatic post-processing (_Example:_ language translation & reformatting) 🧠
 
 * [Bjarne Stroustrup](http://www.stroustrup.com)
 * [Herb Sutter](http://herbsutter.com/)
 
-* living document23
-* Problems
-  * sets of rules have NOT been completely checked for
-    * completeness,
-    * consistency, or
-    * enforceability
-  * ??? 
-    * == MISSING information
-  * Update reference sections /pre-C++11
-  * list more-or-less | up-to-date | to-do
-    * see [To-do: Unclassified proto-rules](#S-unclassified)
-
-* [In: Introduction](#S-introduction)
-* [P: Philosophy](#S-philosophy)
-* [I: Interfaces](#S-interfaces)
-* [F: Functions](#S-functions)
-* [C: Classes and class hierarchies](#S-class)
-* [Enum: Enumerations](#S-enum)
-* [R: Resource management](#S-resource)
-* [ES: Expressions and statements](#S-expr)
-* [Per: Performance](#S-performance)
-* [CP: Concurrency and parallelism](#S-concurrency)
-* [E: Error handling](#S-errors)
-* [Con: Constants and immutability](#S-const)
-* [T: Templates and generic programming](#S-templates)
-* [CPL: C-style programming](#S-cpl)
-* [SF: Source files](#S-source)
-* [SL: The Standard Library](#sl-the-standard-library)
-
-Supporting sections:
-
-* [A: Architectural ideas](#S-A)
-* [NR: Non-Rules and myths](#S-not)
-* [RF: References](#S-references)
-* [Pro: Profiles](#S-profile)
-* [GSL: Guidelines support library](#gsl-guidelines-support-library)
-* [NL: Naming and layout suggestions](#S-naming)
-* [FAQ: Answers to frequently asked questions](#S-faq)
-* [Appendix A: Libraries](#S-libraries)
-* [Appendix B: Modernizing code](#S-modernizing)
-* [Appendix C: Discussion](#S-discussion)
-* [Appendix D: Supporting tools](#S-tools)
-* [Glossary](#S-glossary)
-* [To-do: Unclassified proto-rules](#S-unclassified)
-
-rules / SPECIFIC language features
-
-* assignment:
-[regular types](#Rc-regular) --
-[prefer initialization](#Rc-initialize) --
-[copy](#Rc-copy-semantic) --
-[move](#Rc-move-semantic) --
-[other operations](#Rc-matched) --
-[default](#Rc-eqdefault)
-* `class`:
-[data](#Rc-org) --
-[invariant](#Rc-struct) --
-[members](#Rc-member) --
-[helpers](#Rc-helper) --
-[concrete types](#SS-concrete) --
-[ctors, =, and dtors](#S-ctor) --
-[hierarchy](#SS-hier) --
-[operators](#SS-overload)
-* `concept`:
-[rules](#SS-concepts) --
-[in generic programming](#Rt-raise) --
-[template arguments](#Rt-concepts) --
-[semantics](#Rt-low)
-* constructor:
-[invariant](#Rc-struct) --
-[establish invariant](#Rc-ctor) --
-[`throw`](#Rc-throw) --
-[default](#Rc-default0) --
-[not needed](#Rc-default) --
-[`explicit`](#Rc-explicit) --
-[delegating](#Rc-delegating) --
-[`virtual`](#Rc-ctor-virtual)
-* derived `class`:
-[when to use](#Rh-domain) --
-[as interface](#Rh-abstract) --
-[destructors](#Rh-dtor) --
-[copy](#Rh-copy) --
-[getters and setters](#Rh-get) --
-[multiple inheritance](#Rh-mi-interface) --
-[overloading](#Rh-using) --
-[slicing](#Rc-copy-virtual) --
-[`dynamic_cast`](#Rh-dynamic_cast)
-* destructor:
-[and constructors](#Rc-matched) --
-[when needed?](#Rc-dtor) --
-[must not fail](#Rc-dtor-fail)
-* exception:
-[errors](#S-errors) --
-[`throw`](#Re-throw) --
-[for errors only](#Re-errors) --
-[`noexcept`](#Re-noexcept) --
-[minimize `try`](#Re-catch) --
-[what if no exceptions?](#Re-no-throw-codes)
+* assignment
+  * [regular types](#Rc-regular)
+  * [prefer initialization](#Rc-initialize)
+  * [copy](#Rc-copy-semantic)
+  * [move](#Rc-move-semantic)
+  * [other operations](#Rc-matched)
+  * [default](#Rc-eqdefault)
+* `class`
+  * [data](#Rc-org)
+  * [invariant](#Rc-struct)
+  * [members](#Rc-member)
+  * [helpers](#Rc-helper)
+  * [concrete types](#SS-concrete)
+  * [ctors, =, and dtors](#S-ctor)
+  * [hierarchy](#SS-hier)
+  * [operators](#SS-overload)
+* `concept`
+  * [rules](#SS-concepts) 
+  * [in generic programming](#Rt-raise) 
+  * [template arguments](#Rt-concepts)
+  * [semantics](#Rt-low)
+* constructor
+  * [invariant](#Rc-struct)
+  * [establish invariant](#Rc-ctor)
+  * [`throw`](#Rc-throw)
+  * [default](#Rc-default0)
+  * [not needed](#Rc-default)
+  * [`explicit`](#Rc-explicit)
+  * [delegating](#Rc-delegating)
+  * [`virtual`](#Rc-ctor-virtual)
+* derived `class`
+  * [when to use](#Rh-domain)
+  * [as interface](#Rh-abstract)
+  * [destructors](#Rh-dtor)
+  * [copy](#Rh-copy)
+  * [getters and setters](#Rh-get)
+  * [multiple inheritance](#Rh-mi-interface)
+  * [overloading](#Rh-using)
+  * [slicing](#Rc-copy-virtual)
+  * [`dynamic_cast`](#Rh-dynamic_cast)
+* destructor
+  * [and constructors](#Rc-matched)
+  * [when needed?](#Rc-dtor)
+  * [must not fail](#Rc-dtor-fail)
+* exception
+  * [errors](#S-errors)
+  * [`throw`](#Re-throw)
+  * [for errors only](#Re-errors)
+  * [`noexcept`](#Re-noexcept)
+  * [minimize `try`](#Re-catch)
+  * [what if no exceptions?](#Re-no-throw-codes)
 * `for`:
 [range-for and for](#Res-for-range) --
 [for and while](#Res-for-while) --
@@ -174,100 +138,64 @@ You can look at design concepts used to express the rules:
 * postcondition: ???
 * resource: ???
 
-# <a name="S-abstract"></a>Abstract
+# Introduction
 
-* see [README](README.md)
+## Audience
 
-# <a name="S-introduction"></a>In: Introduction
+* ALL C++ programmers / includes [C programmers](#cpl-c-style-programming)
 
-Introduction summary:
+## Goal
 
-* [In.target: Target readership](#SS-readers)
-* [In.aims: Aims](#SS-aims)
-* [In.not: Non-aims](#SS-non)
-* [In.force: Enforcement](#SS-force)
-* [In.struct: The structure of this document](#SS-struct)
-* [In.sec: Major sections](#SS-sec)
-
-## <a name="SS-readers"></a>In.target: Target readership
-
-* ALL C++ programmers / includes [C programmers](#S-cpl)
-
-## <a name="SS-aims"></a>In.aims: Aims
-
-* see [README.md](README.md)
-* zero-overhead principle
+* 💡zero-overhead principle💡
   * == 
-    * "what you don't use, you don't pay for"
-    * "when you use an abstraction mechanism appropriately, you get at least as good performance as if you had handcoded using lower-level language constructs"
+    * if you do NOT use -> you do NOT pay for
+    * if you use an abstraction mechanism -> performance == performance | hardcode
+* portability ACROSS MANY compilers
 
-### <a name="R0"></a>In.0: Don't panic!
+### NOT panic
 
-* TODO:
-Take the time to understand the implications of a guideline rule on your program.
+* these guidelines' design
+  * follow ["subset of superset" principle (Stroustrup05)](#bibliography)
+  * define a C++'s subset
+  * recommendation
+    * use [library components](#gsl-guidelines-support-library)
+      * Reason:🧠avoid errors🧠
+  * rules
+    * emphasize
+      * static type safety
+      * resource safety
+      * possibilities -- for -- 
+        * range checking,
+        * avoiding dereferencing `nullptr`,
+        * avoiding dangling pointers
+    * offer alternativeS
+    * SOME are
+      * heuristic
+        * == depend -- on the -- context
+      * general principles
+    * simple
+      * ❌ALTHOUGH, they can be DIFFICULT to apply❌
+  * allow [gradual adoption](#appendix-b-modernizing-code)
+  * out of the scope
+    * business' use cases
 
-These guidelines are designed according to the "subset of superset" principle ([Stroustrup05](#Stroustrup05)).
-They do not simply define a subset of C++ to be used (for reliability, safety, performance, or whatever).
-Instead, they strongly recommend the use of a few simple "extensions" ([library components](#gsl-guidelines-support-library))
-that make the use of the most error-prone features of C++ redundant, so that they can be banned (in our set of rules).
+## NOT goal
 
-The rules emphasize static type safety and resource safety.
-For that reason, they emphasize possibilities for range checking, for avoiding dereferencing `nullptr`, for avoiding dangling pointers, and the systematic use of exceptions (via RAII).
-Partly to achieve that and partly to minimize obscure code as a source of errors, the rules also emphasize simplicity and the hiding of necessary complexity behind well-specified interfaces.
+* rules' NOT design
+  * minimal
+  * orthogonal
+  
+* != 
+  * ALTERNATIVE to C++
+  * language-technical detail 
 
-Many of the rules are prescriptive.
-We are uncomfortable with rules that simply state "don't do that!" without offering an alternative.
-One consequence of that is that some rules can be supported only by heuristics, rather than precise and mechanically verifiable checks.
-Other rules articulate general principles. For these more general rules, more detailed and specific rules provide partial checking.
+* how to convert old C++ code -- to -- modern code?
 
-These guidelines address the core of C++ and its use.
-We expect that most large organizations, specific application areas, and even large projects will need further rules, possibly further restrictions, and further library support.
-For example, hard-real-time programmers typically can't use free store (dynamic memory) freely and will be restricted in their choice of libraries.
-We encourage the development of such more specific rules as addenda to these core guidelines.
-Build your ideal small foundation library and use that, rather than lowering your level of programming to glorified assembly code.
+* force you to write -- via -- impoverished subset of C++
 
-The rules are designed to allow [gradual adoption](#S-modernizing).
+* value-neutral
 
-Some rules aim to increase various forms of safety while others aim to reduce the likelihood of accidents, many do both.
-The guidelines aimed at preventing accidents often ban perfectly legal C++.
-However, when there are two ways of expressing an idea and one has shown itself a common source of errors and the other has not, we try to guide programmers towards the latter.
-
-## <a name="SS-non"></a>In.not: Non-aims
-
-The rules are not intended to be minimal or orthogonal.
-In particular, general rules can be simple, but unenforceable.
-Also, it is often hard to understand the implications of a general rule.
-More specialized rules are often easier to understand and to enforce, but without general rules, they would just be a long list of special cases.
-We provide rules aimed at helping novices as well as rules supporting expert use.
-Some rules can be completely enforced, but others are based on heuristics.
-
-These rules are not meant to be read serially, like a book.
-You can browse through them using the links.
-However, their main intended use is to be targets for tools.
-That is, a tool looks for violations and the tool returns links to violated rules.
-The rules then provide reasons, examples of potential consequences of the violation, and suggested remedies.
-
-These guidelines are not intended to be a substitute for a tutorial treatment of C++.
-If you need a tutorial for some given level of experience, see [the references](#S-references).
-
-This is not a guide on how to convert old C++ code to more modern code.
-It is meant to articulate ideas for new code in a concrete fashion.
-However, see [the modernization section](#S-modernizing) for some possible approaches to modernizing/rejuvenating/upgrading.
-Importantly, the rules support gradual adoption: It is typically infeasible to completely convert a large code base all at once.
-
-These guidelines are not meant to be complete or exact in every language-technical detail.
-For the final word on language definition issues, including every exception to general rules and every feature, see the ISO C++ standard.
-
-The rules are not intended to force you to write in an impoverished subset of C++.
-They are *emphatically* not meant to define a, say, Java-like subset of C++.
-They are not meant to define a single "one true C++" language.
-We value expressiveness and uncompromised performance.
-
-The rules are not value-neutral.
-They are meant to make code simpler and more correct/safer than most existing C++ code, without loss of performance.
-They are meant to inhibit perfectly valid C++ code that correlates with errors, spurious complexity, and poor performance.
-
-The rules are not precise to the point where a person (or machine) can follow them without thinking.
+* TODO: The rules are not precise to the point where a person (or machine) can follow them without thinking.
 The enforcement parts try to be that, but we would rather leave a rule or a definition a bit vague
 and open to interpretation than specify something precisely and wrong.
 Sometimes, precision comes only with time and experience.
@@ -371,7 +299,7 @@ For example, many examples are language-technical and use names like `f`, `base`
 
 This is not a language manual.
 It is meant to be helpful, rather than complete, fully accurate on technical details, or a guide to existing code.
-Recommended information sources can be found in [the references](#S-references).
+Recommended information sources can be found in [the references](#references).
 
 ## <a name="SS-sec"></a>In.sec: Major sections
 
@@ -392,21 +320,6 @@ Recommended information sources can be found in [the references](#S-references).
 * [SF: Source files](#S-source)
 * [SL: The Standard Library](#sl-the-standard-library)
 
-Supporting sections:
-
-* [A: Architectural ideas](#S-A)
-* [NR: Non-Rules and myths](#S-not)
-* [RF: References](#S-references)
-* [Pro: Profiles](#S-profile)
-* [GSL: Guidelines support library](#gsl-guidelines-support-library)
-* [NL: Naming and layout suggestions](#S-naming)
-* [FAQ: Answers to frequently asked questions](#S-faq)
-* [Appendix A: Libraries](#S-libraries)
-* [Appendix B: Modernizing code](#S-modernizing)
-* [Appendix C: Discussion](#S-discussion)
-* [Appendix D: Supporting tools](#S-tools)
-* [Glossary](#S-glossary)
-* [To-do: Unclassified proto-rules](#S-unclassified)
 
 Each section (e.g., "P" for "Philosophy") and each subsection (e.g., "C.hier" for "Class Hierarchies (OOP)") have an abbreviation for ease of searching and reference.
 The main section abbreviations are also used in rule numbers (e.g., "C.11" for "Make concrete types regular").
@@ -1097,7 +1010,7 @@ that are needed to implement key abstractions, such as `vector`, `span`, `lock_g
 designed and implemented by people with more time and expertise than we usually have.
 Similarly, we can and should design and implement more specialized libraries, rather than leaving the users (often ourselves)
 with the challenge of repeatedly getting low-level code well.
-This is a variant of the [subset of superset principle](#R0) that underlies these guidelines.
+This is a variant of the [subset of superset principle](#not-panic) that underlies these guidelines.
 
 ##### Enforcement
 
@@ -17663,7 +17576,7 @@ An axiom might not be general, but the template writer can assume that it holds 
 ##### Note
 
 In this context axioms are Boolean expressions.
-See the [Palo Alto TR](#S-references) for examples.
+See the [Palo Alto TR](#references) for examples.
 Currently, C++ does not support axioms (even the ISO Concepts TS), so we have to make do with comments for a longish while.
 Once language support is available, the `//` in front of the axiom can be removed
 
@@ -19064,7 +18977,7 @@ Somewhere, possibly in an implementation file, let the compiler check the desire
 
 Not feasible.
 
-# <a name="S-cpl"></a>CPL: C-style programming
+# CPL: C-style programming
 
 * C -- closely related -- C++
   * Reason: 🧠 BOTH originate -- from -- "Classic C" (1978) / have evolved in ISO committees 🧠
@@ -20878,20 +20791,16 @@ and spot the bug.
 
 * [Make member data `public` or (preferably) `private`](#Rh-protected)
 
+# References
 
-# <a name="S-references"></a>RF: References
-
-Many coding standards, rules, and guidelines have been written for C++, and especially for specialized uses of C++.
-Many
-
-* focus on lower-level issues, such as the spelling of identifiers
-* are written by C++ novices
-* see "stopping programmers from doing unusual things" as their primary aim
-* aim at portability across many compilers (some 10 years old)
-* are written to preserve decades old code bases
-* aim at a single application domain
-* are downright counterproductive
-* are ignored (must be ignored by programmers to get their work done well)
+* EXIST MANY C++'s
+  * coding standards,
+  * rules,
+  * guidelines
+  * are written to preserve decades old code bases
+  * aim at a single application domain
+  * are downright counterproductive
+  * are ignored (must be ignored by programmers to get their work done well)
 
 A bad coding standard is worse than no coding standard.
 However an appropriate set of guidelines are much better than no standards: "Form is liberating."
@@ -20953,7 +20862,7 @@ Reference sections:
   Somewhat brief, based on C++14, and (not unreasonably) adjusted to its domain.
 * ???
 
-## <a name="SS-books"></a>RF.books: Books with coding guidelines
+## Books with coding guidelines
 
 * [Meyers96](#Meyers96) Scott Meyers: *More Effective C++*. Addison-Wesley 1996.
 * [Meyers97](#Meyers97) Scott Meyers: *Effective C++, Second Edition*. Addison-Wesley 1997.
@@ -20961,8 +20870,7 @@ Reference sections:
 * [Meyers05](#Meyers05) Scott Meyers: *Effective C++, Third Edition*. Addison-Wesley 2005.
 * [Meyers15](#Meyers15) Scott Meyers: *Effective Modern C++*. O'Reilly 2015.
 * [SuttAlex05](#SuttAlex05) Sutter and Alexandrescu: *C++ Coding Standards*. Addison-Wesley 2005. More a set of meta-rules than a set of rules. Pre-C++11.
-* [Stroustrup05](#Stroustrup05) Bjarne Stroustrup: [A rationale for semantically enhanced library languages](http://www.stroustrup.com/SELLrationale.pdf).
-  LCSD05. October 2005.
+* [Stroustrup05](#bibliography)
 * [Stroustrup14](#Stroustrup05) Stroustrup: [A Tour of C++](http://www.stroustrup.com/Tour.html).
   Addison Wesley 2014.
   Each chapter ends with an advice section consisting of a set of recommendations.
@@ -21058,7 +20966,8 @@ Ideally, we would follow all of the guidelines.
 That would give the cleanest, most regular, least error-prone, and often the fastest code.
 Unfortunately, that is usually impossible because we have to fit our code into large code bases and use existing libraries.
 Often, such code has been written over decades and does not follow these guidelines.
-We must aim for [gradual adoption](#S-modernizing).
+* goal
+  * [gradual adoption](#appendix-b-modernizing-code)
 
 Whatever strategy for gradual adoption we adopt, we need to be able to apply sets of related guidelines to address some set
 of problems first and leave the rest until later.
@@ -21206,10 +21115,13 @@ Once completely enforced through a combination of style rules, static analysis, 
 * avoids undefined behavior by enforcing a key C++ language rule
 
 
-# <a name="S-gsl"></a>GSL: Guidelines support library
+# GSL: Guidelines support library
 
-The GSL is a small library of facilities designed to support this set of guidelines.
-Without these facilities, the guidelines would have to be far more restrictive on language details.
+* GSL
+  * == 💡small library of facilities💡 /
+    * 's design
+      * 👀support this set of guidelines👀
+
 
 The Core Guidelines support library is defined in namespace `gsl` and the names might be aliases for standard library or other well-known library names. Using the (compile-time) indirection through the `gsl` namespace allows for experimentation and for local variants of the support facilities.
 
@@ -22148,7 +22060,7 @@ This section lists recommended libraries, and explicitly recommends a few.
 
 ??? Suitable for the general guide? I think not ???
 
-# <a name="S-modernizing"></a>Appendix B: Modernizing code
+# Appendix B: Modernizing code
 
 Ideally, we follow all rules in all code.
 Realistically, we have to deal with a lot of old code:
@@ -23021,8 +22933,7 @@ Alternatively, we will decide that no change is needed and delete the entry.
   \[Stroustrup94]:    B. Stroustrup. The Design and Evolution of C++ (Addison-Wesley, 1994).
 * <a name="Stroustrup00"></a>
   \[Stroustrup00]:    B. Stroustrup. The C++ Programming Language (Special 3rdEdition) (Addison-Wesley, 2000).
-* <a name="Stroustrup05"></a>
-  \[Stroustrup05]:    B. Stroustrup. [A rationale for semantically enhanced library languages](http://www.stroustrup.com/SELLrationale.pdf).
+* Stroustrup05 - B. Stroustrup. [A rationale for semantically enhanced library languages](http://www.stroustrup.com/SELLrationale.pdf)
 * <a name="Stroustrup13"></a>
   \[Stroustrup13]:    B. Stroustrup. [The C++ Programming Language (4th Edition)](http://www.stroustrup.com/4th.html). Addison Wesley 2013.
 * <a name="Stroustrup14"></a>

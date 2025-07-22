@@ -6,7 +6,7 @@
   * Overview
     * [Big picture issues](wiki.faq.big-picture.md)
     * TODO:
-  * From another language
+  * From another language 
     * TODO:
     * [Learning if you ALREADY know C](wiki.faq.c.md)
     * TODO:
