@@ -210,56 +210,65 @@ Instead, our aim is the less ambitious: "Do the most good for most programmers";
 if you cannot live with a rule, object to it, ignore it, but don't water it down until it becomes meaningless.
 Also, suggest an improvement.
 
-## <a name="SS-force"></a>In.force: Enforcement
+## In.force: Enforcement
 
-Rules with no enforcement are unmanageable for large code bases.
-Enforcement of all rules is possible only for a small weak set of rules or for a specific user community.
+* DIFFERENT use cases
+  * rules / apply |
+    * small set of rules
+    * ALL use cases
 
-* But we want lots of rules, and we want rules that everybody can use.
-* But different people have different needs.
-* But people don't like to read lots of rules.
-* But people can't remember many rules.
+* goal
+  * guidelines / 
+    * help a LOT of people,
+    * make code MORE uniform,
+    * encourage 
+      * to modernize the code
+      * best practices
 
-So, we need subsetting to meet a variety of needs.
+* 👀EXIST **Enforcement** section / EACH rule👀
+  * might be done -- by -- 
+    * code review,
+    * static analysis,
+    * compiler,
+    * run-time checks
+      * NO recommended
 
-* But arbitrary subsetting leads to chaos.
+* rule
+  * can be part -- of -- >= 0 profiles 
+    * -> label | enforcement section
 
-We want guidelines that help a lot of people, make code more uniform, and strongly encourage people to modernize their code.
-We want to encourage best practices, rather than leave all to individual choices and management pressures.
-The ideal is to use all rules; that gives the greatest benefits.
+* profile
+  * built-in
+    * **type**
+      *❌NO type violations❌ 
+        * reinterpreting a `T` as a `U` through casts, unions, or varargs
+    * **bounds**
+      * No bounds violations 
+        * accessing beyond the range of an array
+    * **lifetime**
+      * NO leaks + NO access to invalid objects
+        * leaks == failing to `delete` or multiple `delete`
+        * invalid objects == dereferencing `nullptr`, using a dangling reference
+  * uses
+    * by tools
+    * by human, to make easier to read
 
-This adds up to quite a few dilemmas.
-We try to resolve those using tools.
-Each rule has an **Enforcement** section listing ideas for enforcement.
-Enforcement might be done by code review, by static analysis, by compiler, or by run-time checks.
-Wherever possible, we prefer "mechanical" checking (humans are slow, inaccurate, and bore easily) and static checking.
-Run-time checks are suggested only rarely where no alternative exists; we do not want to introduce "distributed bloat".
-Where appropriate, we label a rule (in the **Enforcement** sections) with the name of groups of related rules (called "profiles").
-A rule can be part of several profiles, or none.
-For a start, we have a few profiles corresponding to common needs (desires, ideals):
-
-* **type**: No type violations (reinterpreting a `T` as a `U` through casts, unions, or varargs)
-* **bounds**: No bounds violations (accessing beyond the range of an array)
-* **lifetime**: No leaks (failing to `delete` or multiple `delete`) and no access to invalid objects (dereferencing `nullptr`, using a dangling reference).
-
-The profiles are intended to be used by tools, but also serve as an aid to the human reader.
-We do not limit our comment in the **Enforcement** sections to things we know how to enforce; some comments are mere wishes that might inspire some tool builder.
-
-Tools that implement these rules shall respect the following syntax to explicitly suppress a rule:
-
-    [[gsl::suppress("tag")]]
-
-and optionally with a message (following usual C++11 standard attribute syntax):
-
-    [[gsl::suppress("tag", justification: "message")]]
-
-where
-
-* `"tag"` is a string literal with the anchor name of the item where the Enforcement rule appears (e.g., for [C.134](#Rh-public) it is "Rh-public"), the
-name of a profile group-of-rules ("type", "bounds", or "lifetime"),
-or a specific rule in a profile ([type.4](#Pro-type-cstylecast), or [bounds.2](#Pro-bounds-arrayindex)). Any text that is not one of those should be rejected.
-
-* `"message"` is a string literal
+* `[[gsl::suppress("tag", justification: "message")]]`
+  * 👀syntax -- to -- supress rules👀
+    * `"tag"`
+      * == string literal /
+        * item's anchor name | Enforcement rule appears, OR
+          * _Example:_ | [C.134](#Rh-public), == "Rh-public"
+        * profile group-of-rules's name
+          * _Example:_  "type", "bounds", or "lifetime"
+    * `justification: "message"`
+      * ⚠️OPTIONAL⚠️
+      * `"message"`
+        * == 
+          * string literal, OR
+          * specific rule | profile ([type.4](#Pro-type-cstylecast), or [bounds.2](#Pro-bounds-arrayindex))
+  * uses
+    * by tools / implement the rules
 
 ## <a name="SS-struct"></a>In.struct: The structure of this document
 
@@ -1061,7 +1070,7 @@ maybe you should design and implement it, and then use it.
 * interface
   * == contract BETWEEN 2 parts of a programPrecisely
 
-### I.1: Make interfaces explicit
+### I.1: 👀Make interfaces explicit👀
 
 ##### Reason
 
@@ -1070,25 +1079,13 @@ maybe you should design and implement it, and then use it.
   * overlooking
 * easier to test
 
-##### Example, bad
-
-Controlling the behavior of a function through a global (namespace scope) variable (a call mode) is implicit and potentially confusing. For example:
-
-    int round(double d)
-    {
-        return (round_up) ? ceil(d) : d;    // don't: "invisible" dependency
-    }
-
-It will not be obvious to a caller that the meaning of two calls of `round(7.2)` might give different results.
-
 ##### Exception
 
-Sometimes we control the details of a set of operations by an environment variable, e.g., normal vs. verbose output or debug vs. optimized.
-The use of a non-local control is potentially confusing, but controls only implementation details of otherwise fixed semantics.
+* ⚠️operations / -- depend on -- environment variable⚠️
 
 ##### Example, bad
 
-Reporting through non-local variables (e.g., `errno`) is easily ignored. For example:
+* TODO: Reporting through non-local variables (e.g., `errno`) is easily ignored. For example:
 
     // don't: no test of fprintf's return value
     fprintf(connection, "logging: %d %d %d\n", x, y, s);
@@ -3696,7 +3693,7 @@ Flag any use of `&&` as a return type, except in `std::move` and `std::forward`.
 ##### Enforcement
 
 * The compiler should do it
-* If the compiler doesn't do it, let tools flag it
+* if the compiler does NOT do it -> use ANOTHER tools
 
 ### <a name="Rf-assignment-op"></a>F.47: Return `T&` from assignment operators
 
