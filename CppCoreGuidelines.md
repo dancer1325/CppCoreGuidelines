@@ -301,29 +301,6 @@ This is not a language manual.
 It is meant to be helpful, rather than complete, fully accurate on technical details, or a guide to existing code.
 Recommended information sources can be found in [the references](#references).
 
-## <a name="SS-sec"></a>In.sec: Major sections
-
-* [In: Introduction](#S-introduction)
-* [P: Philosophy](#S-philosophy)
-* [I: Interfaces](#S-interfaces)
-* [F: Functions](#S-functions)
-* [C: Classes and class hierarchies](#S-class)
-* [Enum: Enumerations](#S-enum)
-* [R: Resource management](#S-resource)
-* [ES: Expressions and statements](#S-expr)
-* [Per: Performance](#S-performance)
-* [CP: Concurrency and parallelism](#S-concurrency)
-* [E: Error handling](#S-errors)
-* [Con: Constants and immutability](#S-const)
-* [T: Templates and generic programming](#S-templates)
-* [CPL: C-style programming](#S-cpl)
-* [SF: Source files](#S-source)
-* [SL: The Standard Library](#sl-the-standard-library)
-
-
-Each section (e.g., "P" for "Philosophy") and each subsection (e.g., "C.hier" for "Class Hierarchies (OOP)") have an abbreviation for ease of searching and reference.
-The main section abbreviations are also used in rule numbers (e.g., "C.11" for "Make concrete types regular").
-
 # <a name="S-philosophy"></a>P: Philosophy
 
 Philosophy rules summary:
@@ -1079,49 +1056,19 @@ If no well-designed, well-documented, and well-supported library exists for an i
 maybe you should design and implement it, and then use it.
 
 
-# <a name="S-interfaces"></a>I: Interfaces
+# I: Interfaces
 
-An interface is a contract between two parts of a program. Precisely stating what is expected of a supplier of a service and a user of that service is essential.
-Having good (easy-to-understand, encouraging efficient use, not error-prone, supporting testing, etc.) interfaces is probably the most important single aspect of code organization.
+* interface
+  * == contract BETWEEN 2 parts of a programPrecisely
 
-Interface rule summary:
-
-* [I.1: Make interfaces explicit](#Ri-explicit)
-* [I.2: Avoid non-`const` global variables](#Ri-global)
-* [I.3: Avoid singletons](#Ri-singleton)
-* [I.4: Make interfaces precisely and strongly typed](#Ri-typed)
-* [I.5: State preconditions (if any)](#Ri-pre)
-* [I.6: Prefer `Expects()` for expressing preconditions](#Ri-expects)
-* [I.7: State postconditions](#Ri-post)
-* [I.8: Prefer `Ensures()` for expressing postconditions](#Ri-ensures)
-* [I.9: If an interface is a template, document its parameters using concepts](#Ri-concepts)
-* [I.10: Use exceptions to signal a failure to perform a required task](#Ri-except)
-* [I.11: Never transfer ownership by a raw pointer (`T*`) or reference (`T&`)](#Ri-raw)
-* [I.12: Declare a pointer that must not be null as `not_null`](#Ri-nullptr)
-* [I.13: Do not pass an array as a single pointer](#Ri-array)
-* [I.22: Avoid complex initialization of global objects](#Ri-global-init)
-* [I.23: Keep the number of function arguments low](#Ri-nargs)
-* [I.24: Avoid adjacent parameters that can be invoked by the same arguments in either order with different meaning](#Ri-unrelated)
-* [I.25: Prefer empty abstract classes as interfaces to class hierarchies](#Ri-abstract)
-* [I.26: If you want a cross-compiler ABI, use a C-style subset](#Ri-abi)
-* [I.27: For stable library ABI, consider the Pimpl idiom](#Ri-pimpl)
-* [I.30: Encapsulate rule violations](#Ri-encapsulate)
-
-**See also**:
-
-* [F: Functions](#S-functions)
-* [C.concrete: Concrete types](#SS-concrete)
-* [C.hier: Class hierarchies](#SS-hier)
-* [C.over: Overloading and overloaded operators](#SS-overload)
-* [C.con: Containers and other resource handles](#SS-containers)
-* [E: Error handling](#S-errors)
-* [T: Templates and generic programming](#S-templates)
-
-### <a name="Ri-explicit"></a>I.1: Make interfaces explicit
+### I.1: Make interfaces explicit
 
 ##### Reason
 
-Correctness. Assumptions not stated in an interface are easily overlooked and hard to test.
+* Correctness
+* avoid
+  * overlooking
+* easier to test
 
 ##### Example, bad
 
@@ -2195,14 +2142,11 @@ Presumably, a bit of checking for potential errors would be added in real code.
 * Hard, it is hard to decide what rule-breaking code is essential
 * Flag rule suppression that enable rule-violations to cross interfaces
 
-# <a name="S-functions"></a>F: Functions
+# F: Functions
 
-A function specifies an action or a computation that takes the system from one consistent state to the next. It is the fundamental building block of programs.
-
-It should be possible to name a function meaningfully, to specify the requirements of its argument, and clearly state the relationship between the arguments and the result. An implementation is not a specification. Try to think about what a function does as well as about how it does it.
-Functions are the most critical part in most interfaces, so see the interface rules.
-
-Function rule summary:
+* function
+  * := action or a computation / system | consistent state1 is -- switched to -- state2
+  * == program' MAIN building block & MOST interfaces' critical part
 
 Function definition rules:
 
@@ -3738,26 +3682,16 @@ Better:
 
 Flag any use of `&&` as a return type, except in `std::move` and `std::forward`.
 
-### <a name="Rf-main"></a>F.46: `int` is the return type for `main()`
+### F.46: `int main()`
+
+* == ⭐️`main()` returns `int`⭐️
+  * ⚠️ALTHOUGH it's NOT required to return explicitly⚠️
 
 ##### Reason
 
-It's a language rule, but violated through "language extensions" so often that it is worth mentioning.
-Declaring `main` (the one global `main` of a program) `void` limits portability.
-
-##### Example
-
-        void main() { /* ... */ };  // bad, not C++
-
-        int main()
-        {
-            std::cout << "This is the way to do it\n";
-        }
-
-##### Note
-
-We mention this only because of the persistence of this error in the community.
-Note that despite its non-void return type, the main function does not require an explicit return statement.
+* 💡 language rule💡/
+  * ⚠️SOMETIMES, violated -- through -- "language extensions"⚠️
+* ⚠️if it would return `void` -> it would limit portability⚠️
 
 ##### Enforcement
 
