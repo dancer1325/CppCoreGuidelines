@@ -417,7 +417,8 @@ Very hard in general.
 * flag uses of casts (casts neuter the type system)
 * detect code that mimics the standard library (hard)
 
-### <a name="Rp-Cplusplus"></a>P.2: Write in ISO Standard C++
+<a name="Rp-Cplusplus"></a>
+### P.2: Write in ISO Standard C++
 
 ##### Reason
 
@@ -19252,15 +19253,15 @@ Flag `using namespace` at global scope in a header file.
 
 ### SF.8: Use `#include` guards | ALL header files (.h)
 
-##### Reason
-
-* avoid
-  * files being `#include`d SEVERAL times
-  * include guard collisions,
-
 * recommendations
   * `SOME_KEY + FILENAME`
     * _Example of SOME_KEY:_ name of library
+
+##### Reason
+
+* avoid
+  * guard collisions
+    * files being `#include`d SEVERAL times
 
 ##### Enforcement
 
@@ -19269,10 +19270,16 @@ Flag `using namespace` at global scope in a header file.
 
 ##### Note
 
-* TODO: Some implementations offer vendor extensions like `#pragma once` as alternative to include guards.
-It is not standard and it is not portable.  It injects the hosting machine's filesystem semantics
-into your program, in addition to locking you down to a vendor.
-Our recommendation is to write in ISO C++: See [rule P.2](#Rp-Cplusplus).
+* ALTERNATIVES
+  * `#pragma once`
+    * provided by some implementations
+    * NOT 
+      * standard
+      * portable
+    * injects the hosting machine's filesystem semantics | your program
+      * to lock you down to a vendor
+    * recommendation
+      * [write in ISO C++](#Rp-Cplusplus)
 
 ### <a name="Rs-cycles"></a>SF.9: Avoid cyclic dependencies among source files
 
