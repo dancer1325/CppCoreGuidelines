@@ -19000,34 +19000,22 @@ You can call C++ from C:
 
 None needed
 
-# <a name="S-source"></a>SF: Source files
+<a name="S-source"></a>
+# SF: Source files
 
-Distinguish between declarations (used as interfaces) and definitions (used as implementations).
-Use header files to represent interfaces and to emphasize logical structure.
+* types
+  * declarations (== interfaces)
+  * definitions (== implementations)
 
-Source file rule summary:
+* header files
+  * uses
+    * interfaces
+    * emphasize logical structure
 
-* [SF.1: Use a `.cpp` suffix for code files and `.h` for interface files if your project doesn't already follow another convention](#Rs-file-suffix)
-* [SF.2: A header file must not contain object definitions or non-inline function definitions](#Rs-inline)
-* [SF.3: Use header files for all declarations used in multiple source files](#Rs-declaration-header)
-* [SF.4: Include header files before other declarations in a file](#Rs-include-order)
-* [SF.5: A `.cpp` file must include the header file(s) that defines its interface](#Rs-consistency)
-* [SF.6: Use `using namespace` directives for transition, for foundation libraries (such as `std`), or within a local scope (only)](#Rs-using)
-* [SF.7: Don't write `using namespace` at global scope in a header file](#Rs-using-directive)
-* [SF.8: Use `#include` guards for all header files](#Rs-guards)
-* [SF.9: Avoid cyclic dependencies among source files](#Rs-cycles)
-* [SF.10: Avoid dependencies on implicitly `#include`d names](#Rs-implicit)
-* [SF.11: Header files should be self-contained](#Rs-contained)
-* [SF.12: Prefer the quoted form of `#include` for files relative to the including file and the angle bracket form everywhere else](#Rs-incform)
-* [SF.13: Use portable header identifiers in `#include` statements](#Rs-portable-header-id)
+<a name="Rs-file-suffix"></a>
+### SF.1: `.cpp` -- for -- code files & `.h` -- for -- interface files
 
-* [SF.20: Use `namespace`s to express logical structure](#Rs-namespace)
-* [SF.21: Don't use an unnamed (anonymous) namespace in a header](#Rs-unnamed)
-* [SF.22: Use an unnamed (anonymous) namespace for all internal/non-exported entities](#Rs-unnamed2)
-
-### <a name="Rs-file-suffix"></a>SF.1: Use a `.cpp` suffix for code files and `.h` for interface files if your project doesn't already follow another convention
-
-See [NL.27](#Rl-file-suffix)
+* [NL.27](#Rl-file-suffix)
 
 ### <a name="Rs-inline"></a>SF.2: A header file must not contain object definitions or non-inline function definitions
 
@@ -21192,52 +21180,24 @@ Many of them are very similar to what became part of the ISO C++ standard in C++
 * `Unique_pointer`  // A type that matches `Pointer`, is movable, and is not copyable
 * `Shared_pointer`   // A type that matches `Pointer`, and is copyable
 
-# <a name="S-naming"></a>NL: Naming and layout suggestions
+<a name="S-naming"></a>
+# NL: Naming and layout suggestions
 
-Consistent naming and layout are helpful.
-If for no other reason because it minimizes "my style is better than your style" arguments.
-However, there are many, many, different styles around and people are passionate about them (pro and con).
-Also, most real-world projects include code from many sources, so standardizing on a single style for all code is often impossible.
-After many requests for guidance from users, we present a set of rules that you might use if you have no better ideas, but the real aim is consistency, rather than any particular rule set.
-IDEs and tools can help (as well as hinder).
+* == set of rules / you MIGHT use
+  * goal
+    * consistency
+  * ❌NOT goal❌
+    * rule set 
+  * MOST of these: aesthetic 
+  * == [Programming: Principles and Practice using C++](http://www.stroustrup.com/programming.html) book
+* allows
+  * establish standard guidelines
+* ALTERNATIVES
+  * provided by IDEs
+  * your personal ones
 
-Naming and layout rules:
-
-* [NL.1: Don't say in comments what can be clearly stated in code](#Rl-comments)
-* [NL.2: State intent in comments](#Rl-comments-intent)
-* [NL.3: Keep comments crisp](#Rl-comments-crisp)
-* [NL.4: Maintain a consistent indentation style](#Rl-indent)
-* [NL.5: Avoid encoding type information in names](#Rl-name-type)
-* [NL.7: Make the length of a name roughly proportional to the length of its scope](#Rl-name-length)
-* [NL.8: Use a consistent naming style](#Rl-name)
-* [NL.9: Use `ALL_CAPS` for macro names only](#Rl-all-caps)
-* [NL.10: Prefer `underscore_style` names](#Rl-camel)
-* [NL.11: Make literals readable](#Rl-literals)
-* [NL.15: Use spaces sparingly](#Rl-space)
-* [NL.16: Use a conventional class member declaration order](#Rl-order)
-* [NL.17: Use K&R-derived layout](#Rl-knr)
-* [NL.18: Use C++-style declarator layout](#Rl-ptr)
-* [NL.19: Avoid names that are easily misread](#Rl-misread)
-* [NL.20: Don't place two statements on the same line](#Rl-stmt)
-* [NL.21: Declare one name (only) per declaration](#Rl-dcl)
-* [NL.25: Don't use `void` as an argument type](#Rl-void)
-* [NL.26: Use conventional `const` notation](#Rl-const)
-* [NL.27: Use a `.cpp` suffix for code files and `.h` for interface files](#Rl-file-suffix)
-
-Most of these rules are aesthetic and programmers hold strong opinions.
-IDEs also tend to have defaults and a range of alternatives.
-These rules are suggested defaults to follow unless you have reasons not to.
-
-We have had comments to the effect that naming and layout are so personal and/or arbitrary that we should not try to "legislate" them.
-We are not "legislating" (see the previous paragraph).
-However, we have had many requests for a set of naming and layout conventions to use when there are no external constraints.
-
-More specific and detailed rules are easier to enforce.
-
-These rules bear a strong resemblance to the recommendations in the [PPP Style Guide](http://www.stroustrup.com/Programming/PPP-style.pdf)
-written in support of Stroustrup's [Programming: Principles and Practice using C++](http://www.stroustrup.com/programming.html).
-
-### <a name="Rl-comments"></a>NL.1: Don't say in comments what can be clearly stated in code
+<a name="Rl-comments"></a>
+### NL.1: Don't say in comments what can be clearly stated in code
 
 ##### Reason
 
@@ -21836,52 +21796,37 @@ This rule was added after many requests for guidance.
 
 Flag `const` used as a suffix for a type.
 
-### <a name="Rl-file-suffix"></a>NL.27: Use a `.cpp` suffix for code files and `.h` for interface files
+<a name="Rl-file-suffix"></a>
+### NL.27: `.cpp` suffix -- for -- code files & `.h` -- for -- interface files
 
 ##### Reason
 
-It's a longstanding convention.
-But consistency is more important, so if your project uses something else, follow that.
+* longstanding convention
+* ⚠️if your project uses something else -> follow that⚠️
+  * Reason:🧠consistency is MORE important🧠 
 
 ##### Note
 
-This convention reflects a common use pattern:
-Headers are more often shared with C to compile as both C++ and C, which typically uses `.h`,
-and it's easier to name all headers `.h` instead of having different extensions for just those headers that are intended to be shared with C.
-On the other hand, implementation files are rarely shared with C and so should typically be distinguished from `.c` files,
-so it's normally best to name all C++ implementation files something else (such as `.cpp`).
-
-The specific names `.h` and `.cpp` are not required (just recommended as a default) and other names are in widespread use.
-Examples are `.hh`, `.C`, and `.cxx`. Use such names equivalently.
-In this document, we refer to `.h` and `.cpp` as a shorthand for header and implementation files,
-even though the actual extension might be different.
-
-Your IDE (if you use one) might have strong opinions about suffixes.
-
-##### Example
-
-    // foo.h:
-    extern int a;   // a declaration
-    extern void foo();
-
-    // foo.cpp:
-    int a;   // a definition
-    void foo() { ++a; }
-
-`foo.h` provides the interface to `foo.cpp`. Global variables are best avoided.
-
-##### Example, bad
-
-    // foo.h:
-    int a;   // a definition
-    void foo() { ++a; }
-
-`#include <foo.h>` twice in a program and you get a linker error for two one-definition-rule violations.
+* common use pattern (== ONLY recommendation) 
+  * headers files
+    * 👀extension `.h` == C header files extension👀
+    * Reason:🧠
+      * normally shared with C -- to -- compile C++ and C
+      * C header files extension == `.h`🧠
+  * implementation files
+    * ⚠️extension (should be) != `.c` files extension⚠️
+      * Reason:🧠they are rarely shared with C🧠
+      * _Example:_ `.cpp`
+  * POSSIBLE Problems:
+    * Problem1: if you include >1 time the WRONGLY specified `.h` -> you get a linker error
 
 ##### Enforcement
 
-* Flag non-conventional file names.
-* Check that `.h` and `.cpp` (and equivalents) follow the rules below.
+* Flag non-conventional file names
+  * ways
+    * linters
+    * code review tools
+    * IDE warnings
 
 # <a name="S-faq"></a>FAQ: Answers to frequently asked questions
 

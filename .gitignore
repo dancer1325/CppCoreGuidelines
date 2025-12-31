@@ -10,3 +10,9 @@ scripts/python/*.pyc
 
 # MacOS-specific
 .DS_Store
+/.idea/.gitignore
+/.idea/aws.xml
+/.idea/CppCoreGuidelines.iml
+/.idea/editor.xml
+/.idea/modules.xml
+/.idea/vcs.xml
