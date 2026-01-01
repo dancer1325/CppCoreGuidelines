@@ -19168,88 +19168,52 @@ The argument-type error for `bar` cannot be caught until link time because of th
 
 ???
 
-### <a name="Rs-using"></a>SF.6: Use `using namespace` directives for transition, for foundation libraries (such as `std`), or within a local scope (only)
+<a name="Rs-using"></a>
+### SF.6: use `using namespace` directives
+
+* use cases
+  * | 
+    * transition (== migrate gradually existing source code)
+    * foundation libraries (_Example:_ `std`)
+    * local scope
 
 ##### Reason
 
- `using namespace` can lead to name clashes, so it should be used sparingly.
- However, it is not always possible to qualify every name from a namespace in user code (e.g., during transition)
- and sometimes a namespace is so fundamental and prevalent in a code base, that consistent qualification would be verbose and distracting.
-
-##### Example
-
-    #include <string>
-    #include <vector>
-    #include <iostream>
-    #include <memory>
-    #include <algorithm>
-
-    using namespace std;
-
-    // ...
-
-Here (obviously), the standard library is used pervasively and apparently no other library is used, so requiring `std::` everywhere
-could be distracting.
-
-##### Example
-
-The use of `using namespace std;` leaves the programmer open to a name clash with a name from the standard library
-
-    #include <cmath>
-    using namespace std;
-
-    int g(int x)
-    {
-        int sqrt = 7;
-        // ...
-        return sqrt(x); // error
-    }
-
-However, this is not particularly likely to lead to a resolution that is not an error and
-people who use `using namespace std` are supposed to know about `std` and about this risk.
+* `using namespace`
+  * bring ALL namespace's names | CURRENT scope
+  * ⚠️POSSIBLE PROBLEMS⚠️
+    * name clashes
 
 ##### Note
 
-A `.cpp` file is a form of local scope.
-There is little difference in the opportunities for name clashes in an N-line `.cpp` containing a `using namespace X`,
-an N-line function containing a `using namespace X`,
-and M functions each containing a `using namespace X`with N lines of code in total.
+* `.cpp` file
+  * == local scope (== that file)
+
+* name clash risk of `using namespace` globally | ".cpp" == (OR similar) name clash risk of `using namespace` locally | ".cpp"'s functions
 
 ##### Note
 
-[Don't write `using namespace` at global scope in a header file](#Rs-using-directive).
+* [NOT write `using namespace` | ".h"'s global scope](#Rs-using-directive)
 
-### <a name="Rs-using-directive"></a>SF.7: Don't write `using namespace` at global scope in a header file
+<a name="Rs-using-directive"></a>
+
+### SF.7: NOT write `using namespace` | ".h"'s global scope
 
 ##### Reason
 
-Doing so takes away an `#include`r's ability to effectively disambiguate and to use alternatives. It also makes `#include`d headers order-dependent as they might have different meaning when included in different orders.
-
-##### Example
-
-    // bad.h
-    #include <iostream>
-    using namespace std; // bad
-
-    // user.cpp
-    #include "bad.h"
-
-    bool copy(/*... some parameters ...*/);    // some function that happens to be named copy
-
-    int main()
-    {
-        copy(/*...*/);    // now overloads local ::copy and std::copy, could be ambiguous
-    }
+* if you use it (== `#include`) -> brings it AUTOMATICALLY / you can NOT use ALTERNATIVES
+* `#include`d headers order-dependent
+  * Reason:🧠DIFFERENT meaning / DIFFERENT orders🧠
 
 ##### Note
 
-An exception is `using namespace std::literals;`. This is necessary to use string literals
+* TODO: An exception is `using namespace std::literals;`. This is necessary to use string literals
 in header files and given [the rules](http://eel.is/c++draft/over.literal) - users are required
 to name their own UDLs `operator""_x` - they will not collide with the standard library.
 
 ##### Enforcement
 
-Flag `using namespace` at global scope in a header file.
+* flag `using namespace` | ".h"'s global scope
 
 ### SF.8: Use `#include` guards | ALL header files (.h)
 
