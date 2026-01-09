@@ -21243,43 +21243,36 @@ Always indenting the statement after `if (...)`, `for (...)`, and `while (...)` 
 
 Use a tool.
 
-### <a name="Rl-name-type"></a>NL.5: Avoid encoding type information in names
+<a name="Rl-name-type"></a>
+### NL.5: Avoid encoding type information | names
 
 ##### Rationale
 
-If names reflect types rather than functionality, it becomes hard to change the types used to provide that functionality.
-Also, if the type of a variable is changed, code using it will have to be modified.
-Minimize unintentional conversions.
-
-##### Example, bad
-
-    void print_int(int i);
-    void print_string(const char*);
-
-    print_int(1);          // repetitive, manual type matching
-    print_string("xyzzy"); // repetitive, manual type matching
-
-##### Example, good
-
-    void print(int i);
-    void print(string_view);    // also works on any string-like sequence
-
-    print(1);              // clear, automatic type matching
-    print("xyzzy");        // clear, automatic type matching
+* if names reflect types (!= functionality) 
+  * & you need to change the type -> you need to rename the name | ALL parts of the code
+  * -> possible unintentional conversions
+    * Reason:🧠compiler can detect problematic type conversions🧠
 
 ##### Note
 
-Names with types encoded are either verbose or cryptic.
+* names / types encoded
+  * are verbose & cryptic
 
-    printS  // print a std::string
-    prints  // print a C-style string
-    printi  // print an int
-
-Requiring techniques like Hungarian notation to encode a type has been used in untyped languages, but is generally unnecessary and actively harmful in a strongly statically-typed language like C++, because the annotations get out of date (the warts are just like comments and rot just like them) and they interfere with good use of the language (use the same name and overload resolution instead).
+* Hungarian notation to encode a type
+  * uses
+    * | untyped languages
+  * recommendations
+    * ❌NOT use it❌
+  * ❌NOT use case❌
+    * strongly statically-typed language (_Example:_ C++)
+      * Reason:🧠annotations 
+        * get out of date (the warts are just like comments and rot just like them)
+        * interfere -- with -- good use of the language
+          * recommendation: use the SAME name & overload resolution🧠
 
 ##### Note
 
-Some styles use very general (not type-specific) prefixes to denote the general use of a variable.
+* TODO: Some styles use very general (not type-specific) prefixes to denote the general use of a variable.
 
     auto p = new User();
     auto p = make_unique<User>();
