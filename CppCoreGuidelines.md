@@ -11122,30 +11122,25 @@ If at all possible, reduce the conditions to a simple set of alternatives (e.g.,
 
 Hard. At best a heuristic. Look for an uninitialized variable followed by a loop assigning to it.
 
-### <a name="Res-macros"></a>ES.30: Don't use macros for program text manipulation
+<a name="Res-macros"></a>
+### ES.30: ❌NOT use macros -- for -- program text manipulation❌
 
 ##### Reason
 
-Macros are a major source of bugs.
-Macros don't obey the usual scope and type rules.
-Macros ensure that the human reader sees something different from what the compiler sees.
-Macros complicate tool building.
-
-##### Example, bad
-
-    #define Case break; case   /* BAD */
-
-This innocuous-looking macro makes a single lower case `c` instead of a `C` into a bad flow-control bug.
+* Macros
+  * are a major source of bugs
+  * do NOT obey the usual scope & type rules
+  * complicate tool building
+    * _Example:_ NOT possible to debug the macro 
 
 ##### Note
 
-This rule does not ban the use of macros for "configuration control" use in `#ifdef`s, etc.
-
-In the future, modules are likely to eliminate the need for macros in configuration control.
+* use cases
+  * configuration control (`#ifdef`s, etc.)
 
 ##### Note
 
-This rule is meant to also discourage use of `#` for stringification and `##` for concatenation.
+* TODO: This rule is meant to also discourage use of `#` for stringification and `##` for concatenation.
 As usual for macros, there are uses that are "mostly harmless", but even these can create problems for tools,
 such as auto completers, static analyzers, and debuggers.
 Often the desire to use fancy macros is a sign of an overly complex design.
@@ -11187,7 +11182,9 @@ In the future, static reflection is likely to eliminate the last needs for the p
 
 ##### Enforcement
 
-Scream when you see a macro that isn't just used for source control (e.g., `#ifdef`)
+* macro
+  * use cases
+    * source control (e.g., `#ifdef`)
 
 ### <a name="Res-macros2"></a>ES.31: Don't use macros for constants or "functions"
 
